@@ -1,4 +1,3 @@
-import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -11,24 +10,23 @@ public class PalindroneCheckerApp {
         System.out.print("Enter a string: ");
         String input = sc.nextLine().toLowerCase();
 
-        // Create a Deque to store characters
-        Deque<Character> deque = new LinkedList<>();
+        // Create a LinkedList to store characters
+        LinkedList<Character> list = new LinkedList<>();
 
-        // Add each character to the deque
+        // Add each character to the LinkedList
         for (char c : input.toCharArray()) {
-            deque.addLast(c);
+            list.add(c);
         }
 
         // Flag to track palindrome result
         boolean isPalindrome = true;
 
-        // Continue comparison while more than one element exists
-        while (deque.size() > 1) {
+        // Compare until only one or zero elements remain
+        while (list.size() > 1) {
+            char first = list.removeFirst();
+            char last = list.removeLast();
 
-            char front = deque.removeFirst();
-            char rear = deque.removeLast();
-
-            if (front != rear) {
+            if (first != last) {
                 isPalindrome = false;
                 break;
             }
@@ -36,9 +34,9 @@ public class PalindroneCheckerApp {
 
         // Print result
         if (isPalindrome) {
-            System.out.println("Result: The string is a Palindrome.");
+            System.out.println("Is Palindrome? true");
         } else {
-            System.out.println("Result: The string is NOT a Palindrome.");
+            System.out.println("Is Palindrome? false");
         }
 
         sc.close();
