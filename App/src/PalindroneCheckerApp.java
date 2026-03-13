@@ -1,68 +1,46 @@
-/**
- * =========================================================
- * MAIN CLASS - UseCase4PalindromeCheckerApp
- * =========================================================
- *
- * Use Case 4: Character Array Based Validation
- *
- * Description:
- * This class validates a palindrome by converting
- * the string into a character array and comparing
- * characters using the two-pointer technique.
- *
- * At this stage, the application:
- * - Converts string to char array
- * - Uses start and end pointers
- * - Compares characters efficiently
- * - Displays the result
- *
- * This reduces extra memory usage.
- *
- * @author SUMA SREE
- * @version 4.0
- */
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
 
 public class PalindroneCheckerApp {
 
-    /**
-     * Application entry point for UC4.
-     *
-     * @param args Command-line arguments
-     */
     public static void main(String[] args) {
 
-        // Declare and initialize the input string
-        String input = "radar";
+        // Define the input string
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine().toLowerCase();
 
-        // Convert the string into a character array
-        char[] chars = input.toCharArray();
+        // Create a Deque to store characters
+        Deque<Character> deque = new LinkedList<>();
 
-        // Initialize pointer at the beginning
-        int start = 0;
+        // Add each character to the deque
+        for (char c : input.toCharArray()) {
+            deque.addLast(c);
+        }
 
-        // Initialize pointer at the end
-        int end = chars.length - 1;
-
-        // Assume palindrome initially
+        // Flag to track palindrome result
         boolean isPalindrome = true;
 
-        // Continue comparison until pointers cross
-        while (start < end) {
+        // Continue comparison while more than one element exists
+        while (deque.size() > 1) {
 
-            if (chars[start] != chars[end]) {
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
+
+            if (front != rear) {
                 isPalindrome = false;
                 break;
             }
-
-            start++;
-            end--;
         }
 
-        // Display result
+        // Print result
         if (isPalindrome) {
-            System.out.println(input + " is a palindrome.");
+            System.out.println("Result: The string is a Palindrome.");
         } else {
-            System.out.println(input + " is not a palindrome.");
+            System.out.println("Result: The string is NOT a Palindrome.");
         }
+
+        sc.close();
     }
 }
