@@ -1,44 +1,28 @@
-import java.util.LinkedList;
-import java.util.Scanner;
-
 public class PalindroneCheckerApp {
 
     public static void main(String[] args) {
 
-        // Define the input string
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a string: ");
-        String input = sc.nextLine().toLowerCase();
+        String input = "madam";
 
-        // Create a LinkedList to store characters
-        LinkedList<Character> list = new LinkedList<>();
+        boolean result = check(input, 0, input.length() - 1);
 
-        // Add each character to the LinkedList
-        for (char c : input.toCharArray()) {
-            list.add(c);
-        }
-
-        // Flag to track palindrome result
-        boolean isPalindrome = true;
-
-        // Compare until only one or zero elements remain
-        while (list.size() > 1) {
-            char first = list.removeFirst();
-            char last = list.removeLast();
-
-            if (first != last) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        // Print result
-        if (isPalindrome) {
-            System.out.println("Is Palindrome? true");
+        if (result) {
+            System.out.println("Is Palindrome? = true");
         } else {
-            System.out.println("Is Palindrome? false");
+            System.out.println("Is Palindrome? = false");
+        }
+    }
+
+    private static boolean check(String s, int start, int end) {
+
+        if (start >= end) {
+            return true;
         }
 
-        sc.close();
+        if (s.charAt(start) != s.charAt(end)) {
+            return false;
+        }
+
+        return check(s, start + 1, end - 1);
     }
 }
